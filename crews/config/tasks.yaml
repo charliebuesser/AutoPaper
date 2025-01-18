@@ -1,0 +1,9 @@
+outline_task:
+  description: >
+    Erstelle eine Gliederung für eine Seminararbeit mit dem Titel : " {seminararbeitthema} "
+    
+    Die Seminararbeit hat einen Umfang von 12 - 15 Seiten an Text.
+  expected_output: >
+    Eine Gliederung für eine Seminararbeit mit dem Titel {seminararbeitthema}.
+  agent: outline_creator
+  output_file: output/gliederung.md
