@@ -38,14 +38,4 @@
 8. **Schlussfolgerungen und Ausblick (Schluss)**  
    8.1. Zusammenfassung der wichtigsten Erkenntnisse  
    8.2. Zukunftsausblick zur Rolle der generativen KI  
-   8.3. Empfehlungen für Wirtschaft und Gesellschaft  
-
-9. **Literaturverzeichnis (Hauptteil)**  
-   9.1. Auswahl relevanter wissenschaftlicher Artikel  
-   9.2. Bücher und Quellen zur Thematik  
-
-10. **Anhang (optional)**  
-   10.1. Grafiken und Statistiken  
-   10.2. Tabellen und Datenanalyse  
-
-Diese Gliederung bietet einen strukturierten Rahmen für die Seminararbeit und ermöglicht eine umfassende Betrachtung der Fragestellung in Bezug auf die generative KI und deren Auswirkungen auf Arbeitsplätze und die Gesellschaft.
+   8.3. Empfehlungen für Wirtschaft und Gesellschaft

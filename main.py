@@ -1,6 +1,7 @@
 from crews.outline_crew import OutlineCrew
-from crews.create_content_crew import CreateContentCrew
+from crews.content_crew import ContentCrew
 from services.document_service import DocumentService
+from crews.csv_crew import CSVCrew
 from services.rag_service import RagService
 import os
 import argparse
@@ -37,9 +38,9 @@ async def main():
     # Je nach Modus eine andere Funktion ausführen
     if args.modus == 'gliederung':
         for i in range(3):
-            create_outline(args.titel, str(i+1))
+            await create_outline(args.titel, str(i+1))
     elif args.modus == 'inhalt':
-        create_content(args.document_path, args.outline_file_path)
+        await create_content(args.document_path, args.outline_file_path)
         
 
 
@@ -51,18 +52,24 @@ async def create_outline(titel, index):
     OutlineCrew().crew().kickoff(inputs=inputs)
 
 
+
 async def create_content(literature_dir_path, outline_file_path):
+    rag = await setupRag(literature_dir_path)
+    
+    df_einleitung, df_hauptteil, df_schluss, stringfied_outline = CSVCrew().get_structured_outline(outline_file_path)
+
+    df_einleitung, df_hauptteil, df_schluss, stringfied_outline = CSVCrew().get_structured_outline(outline_file_path)
+
+    #result =  await rag.retrieve_rag_answer("Hat Microsoft ein CLoud angebot ? Außerdem Für was ist Google CLoud besonders bekannt ?")
+
+
+async def setupRag(literature_dir_path):
     md_dir_path = DocumentService().create_md_from_literature(literature_dir_path)
     rag = RagService() 
     rag.create_index(md_dir_path)
-
-
-    result =  await rag.retrieve_rag_answer("Hat Microsoft ein CLoud angebot ? Außerdem Für was ist Google CLoud besonders bekannt ?")
-
-
-
+    return rag
 
 if __name__ == "__main__":
     import asyncio
-
+    os.environ["OPENAI_API_KEY"]="__"
     asyncio.run(main())

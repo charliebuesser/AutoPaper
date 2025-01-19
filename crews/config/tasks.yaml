@@ -10,3 +10,28 @@ outline_task:
     Eine Gliederung für eine Seminararbeit mit dem Titel {seminararbeitthema}.
   agent: outline_creator
   output_file: output/gliederung_ansatz{index}.md
+
+
+
+csv_task:
+  description: >
+    Deine Aufgabe ist es, die vorliegende Gliederung in ein CSV-Format zu transformieren. 
+    Das CSV soll 3 Spalten haben: Nummerierung, Name des Kapitels und Arbeitsabschnitt (hier wird ein String eingefügt, der angibt, ob das Kapitel Teil der EINLEITUNG, des HAUPTTEILS oder des SCHLUSS ist).
+    Wichitg: In der ersten Zeile müssen die Spaltennamen stehen, wie im Beispiel.
+
+    Ein Beispiel ist folgendes:
+    
+    Nummerierung;Kapitelname;Arbeitsabschnitt
+    1.0;Einleitung;Einleitung
+    1.1;HintergrundundRelevanzdesThemas;Einleitung
+    1.2;ZielsetzungderSeminararbeit;Einleitung
+    2.0;GrundlagendergenerativenKI;Hauptteil
+    2.1;DefinitionundFunktionsweisevongenerativerKI;Hauptteil
+
+    Jetzt bist du dran.                           
+    Die aktuelle GLiederung ist folgende:
+    {gliederung}
+  expected_output: >
+    Die transformierte Gliederung im CSV-Format.
+    Das CSV hat keine '```'
+  agent: outline_creator
