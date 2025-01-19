@@ -71,5 +71,5 @@ async def setupRag(literature_dir_path):
 
 if __name__ == "__main__":
     import asyncio
-    os.environ["OPENAI_API_KEY"]="__"
+    os.environ["OPENAI_API_KEY"]="____"
     asyncio.run(main())
