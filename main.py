@@ -1,10 +1,12 @@
 from crews.outline_crew import OutlineCrew
 from crews.create_content_crew import CreateContentCrew
+from services.document_service import DocumentService
+from services.rag_service import RagService
 import os
 import argparse
 
 
-def main():
+async def main():
     parser = argparse.ArgumentParser(description="Wähle einen Modus aus, um die Anwendung auszuführen.")
     parser.add_argument('--modus', type=str, choices=['gliederung', 'inhalt'], required=True,
                         help="Wähle entweder 'gliederung' oder 'inhalt'.")
@@ -15,6 +17,9 @@ def main():
 
     parser.add_argument('--document_path', type=str, required=False,
                         help="Der absolute Path zu dem Directory mit den Literatur PDF Files")
+    
+    parser.add_argument('--outline_file_path', type=str, required=False,
+                        help="Der absolute Path zu der finalen Gliederung")
     
     
     
@@ -34,11 +39,11 @@ def main():
         for i in range(3):
             create_outline(args.titel, str(i+1))
     elif args.modus == 'inhalt':
-        create_content(args.document_path)
+        create_content(args.document_path, args.outline_file_path)
         
 
 
-def create_outline(titel, index):
+async def create_outline(titel, index):
 
     inputs = {
     'seminararbeitthema': titel ,
@@ -46,12 +51,18 @@ def create_outline(titel, index):
     OutlineCrew().crew().kickoff(inputs=inputs)
 
 
-def create_content(literature_dir_path):
-    md_path = CreateContentCrew().create_md_from_literature(literature_dir_path)
+async def create_content(literature_dir_path, outline_file_path):
+    md_dir_path = DocumentService().create_md_from_literature(literature_dir_path)
+    rag = RagService() 
+    rag.create_index(md_dir_path)
+
+
+    result =  await rag.retrieve_rag_answer("Hat Microsoft ein CLoud angebot ? Außerdem Für was ist Google CLoud besonders bekannt ?")
 
 
 
 
 if __name__ == "__main__":
-    os.environ["OPENAI_API_KEY"]="_"
-    main()
+    import asyncio
+
+    asyncio.run(main())
