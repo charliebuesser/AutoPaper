@@ -1,6 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from docling.document_converter import DocumentConverter
+from ..Config import prompt_temeplate
 import os
 
 @CrewBase
@@ -37,3 +38,11 @@ class ContentCrew():
       process=Process.sequential,
       verbose=True,
     )
+  
+  def handle_mainpart(self, titel, gliederung):
+    rag_prompt = prompt_temeplate.rag_template_mainpart.replace("{thema}",titel)
+    rag_prompt = rag_prompt.replace("{gliederung}",gliederung)
+
+    
+
+    result = self.rag.retrieve_rag_answer("")
