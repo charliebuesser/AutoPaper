@@ -7,7 +7,7 @@ import os
 
 @CrewBase
 class CSVCrew():
-  """Content crew"""
+  """CSV crew"""
 
   @agent
   def outline_creator(self) -> Agent:
@@ -95,3 +95,4 @@ class CSVCrew():
         nummerierung = row['Nummerierung']
         kapitelname = row['Kapitelname']
         gliederung_string += f"{nummerierung} {kapitelname}\n"
+    return gliederung_string

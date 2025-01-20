@@ -1,0 +1,18 @@
+write_task:
+  description: >
+    Verfasse das Kapitel "{kapitel}" für die Seminararbeit mit dem Titel "{titel}".
+    Die Seminararbeit ist wie folgt gegliedert:
+
+    {gliederung}
+
+    Du hast bereits wichtige Informationen und Literaturverweise in Form von Stichpunkten gesammelt.
+
+    Beachte: Der ausformulierte Text darf ausschließlich auf den in den Stichpunkten genannten Informationen und Literaturverweisen basieren. Verwende die Literaturnummern aus den Stichpunkten auch im Fließtext.
+    Hier sind die Stichpunkte und Literaturverweise für das Kapitel:
+
+    {bulletpoints}
+
+    Verfasse nun das Kapitel.
+  expected_output: >
+    Das vollständig ausformulierte Kapitel mit allen korrekten Literaturverweisen.
+  agent: content_creator
