@@ -3,8 +3,11 @@
 rag_template_mainpart="""
 Erstelle stichpunktartige Notizen für das Kapitel "{abschnitt}" der Seminararbeit zum Thema "{thema}". Diese Notizen dienen als Grundlage zur Ausarbeitung des gesamten Kapitels.
 
+
 Die vollständige Gliederung der Seminararbeit lautet:
 {gliederung}
 
+
+Hinweiß: Füge kein Literaturverzeichnis an deine Notizen an.
 Konzentriere dich ausschließlich auf das Kapitel "{abschnitt}".
 """

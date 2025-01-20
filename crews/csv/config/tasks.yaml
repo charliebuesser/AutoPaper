@@ -1,17 +1,21 @@
 csv_task:
   description: >
     Deine Aufgabe ist es, die vorliegende Gliederung in ein CSV-Format zu transformieren. 
-    Das CSV soll 3 Spalten haben: Nummerierung, Name des Kapitels und Arbeitsabschnitt (hier wird ein String eingefügt, der angibt, ob das Kapitel Teil der EINLEITUNG, des HAUPTTEILS oder des SCHLUSS ist).
+    Das CSV soll 4 Spalten haben: Nummerierung, Name des Kapitels und Arbeitsabschnitt (hier wird ein String eingefügt, der angibt, ob das Kapitel Teil der EINLEITUNG, des HAUPTTEILS oder des SCHLUSS ist) sowie Überkapitel.
     Wichitg: In der ersten Zeile müssen die Spaltennamen stehen, wie im Beispiel.
 
     Ein Beispiel ist folgendes:
     
-    Nummerierung;Kapitelname;Arbeitsabschnitt
-    1.0;Einleitung;Einleitung
-    1.1;HintergrundundRelevanzdesThemas;Einleitung
-    1.2;ZielsetzungderSeminararbeit;Einleitung
-    2.0;GrundlagendergenerativenKI;Hauptteil
-    2.1;DefinitionundFunktionsweisevongenerativerKI;Hauptteil
+    Nummerierung;Kapitelname;Arbeitsabschnitt;Überkapitel
+    1.0;Einleitung;Einleitung;1
+    1.1;Hintergrund und Relevanz des Themas;Einleitung;0
+    1.2;Zielsetzung der Seminararbeit;Einleitung;0
+    2.0;Grundlagen der generativen KI;Hauptteil;1
+    2.1;Definition und Funktionsweise von generativer KI;Hauptteil;0
+
+    Hinweis zu der Spalte Überkapitel:
+    Du sollst zurückgeben, ob es sich bei dem Gliederungspunkt um ein übergeordnetes Kapitel oder ein Unterkapitel handelt.
+    Definition Überkapitel: Ein Kapitel, welches hierarchisch Punkte unter sich hat, ist ein Überkapitel. 1.2 ist beispielsweise ein Überkapitel von 1.2.2.
 
     Jetzt bist du dran.                           
     Die aktuelle GLiederung ist folgende:

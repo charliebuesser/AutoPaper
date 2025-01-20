@@ -100,6 +100,11 @@ from llama_index.core.node_parser import SentenceSplitter
 
 
 class CitationQueryEngineWorkflow(Workflow):
+
+    def __init__(self):
+        super().__init__(timeout=None)
+
+        
     @step
     async def retrieve(
         self, ctx: Context, ev: StartEvent

@@ -46,7 +46,14 @@ class ContentCrew():
     main_df['cite'] = ''
     
     for index, row in main_df.iterrows():
+      if row['Überkapitel'] == 1:
+        main_df.at[index, 'content'] = ""
+        main_df.at[index, 'cite'] = ""
+        print("###########SKIP############")
+        continue
+
       chapter_name = row['Kapitelname']
+
       print(f"Processing chapter: {chapter_name}")
       result_response, cite_list = await self.handle_rag_main(titel, gliederung,chapter_name)
 
@@ -82,6 +89,13 @@ class ContentCrew():
     return result_response, cite_list
   
 
+
+  async def handle_introduction(self, titel, gliederung, introduciton_df):
+    return
+  
+
+  async def handle_introduction(self, titel, gliederung, introduciton_df):
+    return
   
 
   def parse_cite_from_dataframe(self, index, row):

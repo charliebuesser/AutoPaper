@@ -70,13 +70,13 @@ async def create_content(literature_dir_path, outline_file_path, titel):
     content_crew = ContentCrew(rag)
     
     print("Beginne die Bearbeitung des Hauptteils.")
-    new_df = await content_crew.handle_mainpart(titel, stringfied_outline, df_hauptteil)
+    new_main_df = await content_crew.handle_mainpart(titel, stringfied_outline, df_hauptteil)
     print("Bearbeitung des Hauptteils abgeschlossen.")
 
     # Save the new_df as a CSV file
-    output_file_path = os.path.join(literature_dir_path, f"{titel}_content.csv")
+    output_file_path = f"{titel}_content.csv"
     print(f"Speichere den neuen DataFrame als CSV-Datei unter: {output_file_path}")
-    new_df.to_csv(output_file_path, index=False)
+    new_main_df.to_csv(output_file_path, index=False)
     print(f"Der generierte Inhalt wurde als CSV-Datei unter {output_file_path} gespeichert.")
 
 
@@ -89,5 +89,5 @@ async def setupRag(literature_dir_path):
 
 if __name__ == "__main__":
     import asyncio
-    os.environ["OPENAI_API_KEY"]="___"
+    os.environ["OPENAI_API_KEY"]="__"
     asyncio.run(main())

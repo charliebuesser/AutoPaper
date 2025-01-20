@@ -8,7 +8,9 @@ write_task:
     Du hast bereits wichtige Informationen und Literaturverweise in Form von Stichpunkten gesammelt.
 
     Beachte: Der ausformulierte Text darf ausschließlich auf den in den Stichpunkten genannten Informationen und Literaturverweisen basieren. Verwende die Literaturnummern aus den Stichpunkten auch im Fließtext.
-    Hier sind die Stichpunkte und Literaturverweise für das Kapitel:
+
+
+    Hier sind die Stichpunkte und Literaturverweise welche du für das Kapitel "{kapitel}" nutzen darfst:
 
     {bulletpoints}
 
