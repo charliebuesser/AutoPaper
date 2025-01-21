@@ -29,26 +29,85 @@ class ContentCrew():
     return Task(
     config=self.tasks_config['write_task']
     )
+  
+  @task
+  def write_task_conclusion(self) -> Task:
+    return Task(
+    config=self.tasks_config['write_task_conclusion']
+    )
 
   @crew
-  def crew(self) -> Crew:
+  def main_crew(self) -> Crew:
     """Creates the crew"""
     return Crew(
       agents=self.agents, # Automatically created by the @agent decorator
-      tasks=self.tasks, # Automatically created by the @task decorator
+      tasks=[
+        self.write_task()
+      ], # Automatically created by the @task decorator
       process=Process.sequential,
       verbose=True,
     )
   
+  @crew
+  def conclusion_crew(self) -> Crew:
+    return Crew(
+      agents=self.agents,
+      tasks=[
+        self.write_task_conclusion()
+      ],
+      process=Process.sequential
+    )
+
+  async def handle_conclusion(self, titel, gliederung, conc_df, latex_main_list):
+    main_latex = "\n".join(latex_main_list)
+    conclusion_sub_outline = self.create_sub_outline(conc_df)
+    schlusskapitel = self.get_working_chapter(conc_df, True)
+    schlusskapitel_no_num = self.get_working_chapter(conc_df, False)
+    nummerierung = conc_df.iloc[0]['Nummerierung'].split('.')[0]
+
+    inputs = {
+      'titel': titel,
+      'gliederung': gliederung,
+      'schlusskapitel': schlusskapitel,
+      'sub_outline': conclusion_sub_outline,
+      'hauptteil': main_latex,
+      'schlusskapitel_no_number': schlusskapitel_no_num,
+      'nummerrierung' : nummerierung
+    }
+
+    res = str(self.conclusion_crew().kickoff(inputs=inputs))
+    return
+  
+  def get_working_chapter(self ,df , with_num):
+    first_row = df.iloc[0]
+
+    # Extract 'Nummerierung' and 'Kapitelname' from the first row
+    nummerierung = first_row['Nummerierung']
+    kapitelname = first_row['Kapitelname']
+
+    if with_num:
+      return f"{nummerierung} {kapitelname}\n"
+    return f"{kapitelname}\n"
+  
+
+
+  
+  def create_sub_outline(self, df):
+    gliederung_string = ""
+    for index, row in df.iterrows():
+        nummerierung = row['Nummerierung']
+        kapitelname = row['Kapitelname']
+        gliederung_string += f"{nummerierung} {kapitelname}\n"
+    return gliederung_string
+  
+
   async def handle_mainpart(self, titel, gliederung, main_df):
     print("Starting to handle main part")
     main_df['content'] = ''
-    main_df['cite'] = ''
     
     for index, row in main_df.iterrows():
       if row['Überkapitel'] == 1:
         main_df.at[index, 'content'] = ""
-        main_df.at[index, 'cite'] = ""
         print("###########SKIP############")
         continue
 
@@ -64,16 +123,23 @@ class ContentCrew():
       'bulletpoints' : result_response}
       
       print(f"Inputs prepared for crew kickoff: {inputs}")
-      res = str(self.crew().kickoff(inputs=inputs))
+      res = str(self.main_crew().kickoff(inputs=inputs))
+
+      res = self.replace_cite(res, cite_list)
       print(f"Received response: {res}")
 
       main_df.at[index, 'content'] = res
-      main_df.at[index, 'cite'] = repr(cite_list)
-      
-      print(f"Updated row content and cite for chapter: {chapter_name}")
       
     print("Completed handling main part")
     return main_df
+  
+
+  def replace_cite(self, content, cite):
+     for (index, filename) in cite:
+        content = content.replace(f"[{str(index)}]",f"cite({filename})")
+        print("############# Content")
+        print(f"Inde : {str(index)} , Filename : {filename}")
+     return content
   
 
   async def handle_rag_main(self, titel, gliederung, chapter_name):
@@ -89,7 +155,6 @@ class ContentCrew():
     print(f"Retrieved response and citation list for chapter: {chapter_name}")
     return result_response, cite_list
   
-
 
   async def handle_introduction(self, titel, gliederung, introduciton_df):
     return

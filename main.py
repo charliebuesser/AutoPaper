@@ -46,15 +46,10 @@ async def main():
 
 
 async def create_outline(titel, index):
-
     inputs = {
     'seminararbeitthema': titel ,
     'index' : index}
     OutlineCrew().crew().kickoff(inputs=inputs)
-
-
-
-import pandas as pd
 
 async def create_content(literature_dir_path, outline_file_path, titel):
     print("Starte den Erstellungsvorgang für den Inhalt.")
@@ -74,16 +69,10 @@ async def create_content(literature_dir_path, outline_file_path, titel):
     new_main_df = await content_crew.handle_mainpart(titel, stringfied_outline, df_hauptteil)
     print("Bearbeitung des Hauptteils abgeschlossen.")
 
+    latex_mainpart_list = FinetuneCrew().handle_finetuning_mainpart(new_main_df, titel, stringfied_outline)
 
-    FinetuneCrew().handle_finetuning_mainpart(new_main_df, titel, stringfied_outline)
     
-
-
-    # Save the new_df as a CSV file
-    output_file_path = f"{titel}_content.csv"
-    print(f"Speichere den neuen DataFrame als CSV-Datei unter: {output_file_path}")
-    new_main_df.to_csv(output_file_path, index=False)
-    print(f"Der generierte Inhalt wurde als CSV-Datei unter {output_file_path} gespeichert.")
+    conclusion_part = await content_crew.handle_conclusion( titel, stringfied_outline, df_schluss, latex_mainpart_list)
 
 
 

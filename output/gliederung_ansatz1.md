@@ -1,6 +1,9 @@
 **Gliederung für die Seminararbeit: "Was sieht die aktuelle Landschaft von Cloudprovidern aus?"**
 
-1.2 Ziele und Fragestellungen der Arbeit  
+
+1. **Einleitung (Einleitung)**
+   1.1. Hintergrund und Relevanz des Themas  
+   1.2. Zielsetzung der Seminararbeit  
 
 2. **Vergleich der größten Cloud Anbieter** (Hauptteil)  
    2.1 Marktanteile und Wachstum  

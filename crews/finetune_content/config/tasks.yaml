@@ -17,7 +17,7 @@ write_task:
 
 
     Füge in deinem Text die Literaturverweise an den jeweiligen Stellen ein. 
-    Literaturverweise sind im aktuellen Inhalt als [n] gekennzeichnet. 
+    Literaturverweise sind im aktuellen Inhalt als /cite() gekennzeichnet. 
     Übernimm diese entsprechend, füge aber KEIN extra Literaturverweis am Ende auf !
 
     Hier ist der aktuelle Inhalt, den du anpassen musst:
@@ -29,7 +29,7 @@ write_task:
     Stelle sicher, dass der Text im LaTeX-Format erstellt wird.
     Beginne das LaTeX-Dokument mit \section{ {hauptkapitel_No_Number} }.
 
-    Literaturverweise werden mit \cite{[n]} hinzugefügt.    
+    Literaturverweise werden mit \cite{} hinzugefügt.    
     Beachte, dass das LaTeX-Dokument keine '```' Markierungen zu Beginn oder Ende enthält.
   output_file: latex/{nummerrierung}.tex
   agent: fine_tune_creator

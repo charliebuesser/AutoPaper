@@ -31,6 +31,7 @@ class FinetuneCrew():
   
 
   def handle_finetuning_mainpart(self, main_df, titel, gliederung):
+    latex_results = []
     sub_dfs = self.split_into_subdfs(main_df)
     for chapter_index, df in sub_dfs.items():
         sub_outline = self.create_sub_outline(df)
@@ -46,7 +47,11 @@ class FinetuneCrew():
         'nummerrierung' : chapter_index,
         'hauptkapitel_No_Number' : working_chapter_no_number}
         res = str(self.crew().kickoff(inputs=inputs))
+        latex_results.append(res)
+      
+    return latex_results
 
+ 
   def get_working_chapter(self ,df , with_num):
     first_row = df.iloc[0]
 
@@ -77,7 +82,6 @@ class FinetuneCrew():
         kapitelname = row['Kapitelname']
         content += f"{nummerierung} : {kapitelname}\n"
         content += f"{row['content']} \n \n \n"
-
     return content
 
 
