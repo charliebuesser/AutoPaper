@@ -1,5 +1,6 @@
 from crews.outline.outline_crew import OutlineCrew
 from crews.content.content_crew import ContentCrew
+from crews.finetune_content.finetune_crew import FinetuneCrew
 from services.document_service import DocumentService
 from crews.csv.csv_crew import CSVCrew
 from services.rag_service import RagService
@@ -72,6 +73,11 @@ async def create_content(literature_dir_path, outline_file_path, titel):
     print("Beginne die Bearbeitung des Hauptteils.")
     new_main_df = await content_crew.handle_mainpart(titel, stringfied_outline, df_hauptteil)
     print("Bearbeitung des Hauptteils abgeschlossen.")
+
+
+    FinetuneCrew().handle_finetuning_mainpart(new_main_df, titel, stringfied_outline)
+    
+
 
     # Save the new_df as a CSV file
     output_file_path = f"{titel}_content.csv"

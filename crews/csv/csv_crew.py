@@ -49,7 +49,10 @@ class CSVCrew():
     # Use StringIO to turn the string into a file-like object
     csv_data = StringIO(res)
     # Create a DataFrame from the CSV string
+    # Read the CSV data using a semicolon delimiter
     df = pd.read_csv(csv_data, delimiter=';')
+    df['Nummerierung'] = df['Nummerierung'].astype(str)
+    
     df.columns = df.columns.str.strip()
     return self.split_dataframe(df)
 

@@ -1,0 +1,35 @@
+write_task:
+  description: >
+    Für eine Seminararbeit mit dem Titel "{titel}" musst du das Hauptkapitel "{hauptkapitel}" inklusive aller zugehörigen Unterkapitel umformulieren.
+    Ziel ist es, dass das Hauptkapitel und alle Unterkapitel inhaltlich aufeinander abgestimmt sind.
+    Übernehme dabei die Literaturverweise.
+
+    Die Seminararbeit hat folgende Gliederung:
+
+    {gliederung}
+
+    Du konzentrierst dich ausschließlich auf das Hauptkapitel "{hauptkapitel}" und die dazugehörigen Unterkapitel.    
+    Es dürfen keine weiteren Unterabschnitte erstellt werden, die nicht im Hauptkapitel enthalten sind!
+    
+    Das Hauptkapitel und alle Unterkapitel, auf die du dich ausschließlich fokussierst, sind folgende:
+
+    {sub_outline}
+
+
+    Füge in deinem Text die Literaturverweise an den jeweiligen Stellen ein. 
+    Literaturverweise sind im aktuellen Inhalt als [n] gekennzeichnet. 
+    Übernimm diese entsprechend, füge aber KEIN extra Literaturverweis am Ende auf !
+
+    Hier ist der aktuelle Inhalt, den du anpassen musst:
+
+    {text}
+
+  expected_output: >
+    Deine Aufgabe ist es, das Hauptkapitel "{hauptkapitel}" samt aller Unterkapitel vollständig neu zu formulieren.
+    Stelle sicher, dass der Text im LaTeX-Format erstellt wird.
+    Beginne das LaTeX-Dokument mit \section{ {hauptkapitel_No_Number} }.
+
+    Literaturverweise werden mit \cite{[n]} hinzugefügt.    
+    Beachte, dass das LaTeX-Dokument keine '```' Markierungen zu Beginn oder Ende enthält.
+  output_file: latex/{nummerrierung}.tex
+  agent: fine_tune_creator

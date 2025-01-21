@@ -123,7 +123,7 @@ class CitationQueryEngineWorkflow(Workflow):
             print("Index is empty, load some documents before querying!")
             return None
 
-        retriever = ev.index.as_retriever(similarity_top_k=2)
+        retriever = ev.index.as_retriever(similarity_top_k=4)
         nodes = retriever.retrieve(query)
         print(f"Retrieved {len(nodes)} nodes.")
         return RetrieverEvent(nodes=nodes)

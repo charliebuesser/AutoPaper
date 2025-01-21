@@ -74,6 +74,7 @@ class ContentCrew():
       
     print("Completed handling main part")
     return main_df
+  
 
   async def handle_rag_main(self, titel, gliederung, chapter_name):
     """Handles the RAG processing for a chapter."""
