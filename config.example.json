@@ -1,0 +1,16 @@
+{
+  "openai_api_key": "___",
+  "latex_output_path": "/path/to/output/Latex/output.tex",
+  "latex_template_path": "/path/to/template/base_latex.txt",
+  "base_meta_info": {
+    "kursbezeichnung": "Kursbezeichnung hier",
+    "studiengang": "Studiengang hier",
+    "name": "Vorname Nachname",
+    "matrikelnummer": "Matrikelnummer hier",
+    "name_tutor": "Name Tutor",
+    "arbeit_art": "Art der Arbeit"
+  },
+  "titel": "Titel hier",
+  "document_path": "/path/to/documents",
+  "outline_file_path": "/path/to/outline"
+}

@@ -49,7 +49,7 @@ class FinetuneCrew():
         res = str(self.crew().kickoff(inputs=inputs))
         latex_results.append(res)
       
-    return latex_results
+    return "\n".join(latex_results)
 
  
   def get_working_chapter(self ,df , with_num):

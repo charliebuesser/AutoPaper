@@ -45,10 +45,51 @@ write_task_conclusion:
     Deine Aufgabe ist des den Schlussteil ab dem Kapitel "{schlusskapitel}" samt aller Unterkapitel vollständig zu verfassen.
 
     Stelle sicher, dass der Text im LaTeX-Format erstellt wird.
-    Beginne das LaTeX-Dokument mit \section{ {{schlusskapitel_no_number} } }.
+    Beginne das LaTeX-Dokument mit \section{ {schlusskapitel_no_number}  }.
 
     Literaturverweise werden mit \cite{} hinzugefügt. 
     Beachte, das du KEIN Literaturverzeichnis bzw. \begin{thebibliography} am Ende des Kapitels anhängst !
+    Beachte, dass das LaTeX-Dokument keine '```' Markierungen zu Beginn oder Ende enthält.
+  output_file: latex/{nummerrierung}.tex
+  agent: content_creator
+
+
+
+write_task_introduction:
+  description: >
+    Für eine Seminararbeit mit dem Titel "{titel}" schreibst du den gesamten Einleitungsteil.
+
+    Die gesamte Seminararbeit ist wie folgt gegliedert:
+
+    {gliederung}
+
+
+    Du konzentrierst dich ausschließlich auf den Einleitungsteil ab Kapitel "{anfangskapitel}" und die dazugehörigen Unterkapitel.
+    Es dürfen keine weiteren Unterabschnitte erstellt werden, die nicht in der Gliederung enthalten sind!
+
+    Der Einleitungsteil und alle dazugehörigen Unterkapitel, auf die du dich ausschließlich fokussierst, sind folgende:
+
+    {sub_outline}
+
+
+    Der Hauptteil und Schlussteil von der Seminararbeit sind bereits fertig.
+    Um den Einleitungsteil besser schreiben zu können hast du hier ebenfalls den Hauptteil und Schlussteil der Seminararbeit:
+
+    {text}
+
+
+
+    Schreibe nun den Einleitungsteil ab dem Kapitel "{anfangskapitel}".
+
+  expected_output: >
+    Deine Aufgabe ist des den Einleitungsteil ab dem Kapitel "{anfangskapitel}" samt aller Unterkapitel vollständig zu verfassen.
+
+    Stelle sicher, dass der Text im LaTeX-Format erstellt wird.
+    Beginne das LaTeX-Dokument mit \section{ {anfangskapitel_no_num}  }.
+
+    Wenn es im EInleitungsteil nötig ist Literaturverweise zu verwenden, füge sie mit \cite{} hinzu.
+
+    Nutze dabei nur Literaturverweiße, welche in dem Hauptteil vorgekommen sind !
     Beachte, dass das LaTeX-Dokument keine '```' Markierungen zu Beginn oder Ende enthält.
   output_file: latex/{nummerrierung}.tex
   agent: content_creator

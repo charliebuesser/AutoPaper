@@ -35,6 +35,12 @@ class ContentCrew():
     return Task(
     config=self.tasks_config['write_task_conclusion']
     )
+  
+  @task
+  def write_task_introduction(self) -> Task:
+    return Task(
+    config=self.tasks_config['write_task_introduction']
+    )
 
   @crew
   def main_crew(self) -> Crew:
@@ -57,9 +63,41 @@ class ContentCrew():
       ],
       process=Process.sequential
     )
+  
+  @crew
+  def introduction_crew(self) -> Crew:
+    return Crew(
+      agents=self.agents,
+      tasks=[
+        self.write_task_introduction()
+      ],
+      process=Process.sequential
+    )
+  
+  async def handle_introduciton(self, titel, gliederung, intro_df, latex_main, latex_conclusion):
+    text_latex = latex_main
+    text_latex += f"\n {latex_conclusion}"
 
-  async def handle_conclusion(self, titel, gliederung, conc_df, latex_main_list):
-    main_latex = "\n".join(latex_main_list)
+    introduction_sub_outline = self.create_sub_outline(intro_df)
+    introduciton_kapitel = self.get_working_chapter(intro_df, True)
+    introduction_no_num = self.get_working_chapter(intro_df, False)
+    nummerierung = intro_df.iloc[0]['Nummerierung'].split('.')[0]
+
+    inputs = {
+      'titel': titel,
+      'gliederung': gliederung,
+      'anfangskapitel': introduciton_kapitel,
+      'sub_outline': introduction_sub_outline,
+      'text': text_latex,
+      'anfangskapitel_no_number': introduction_no_num,
+      'nummerrierung': nummerierung
+    }
+
+    res = str(self.introduction_crew().kickoff(inputs=inputs))
+    return res
+
+  async def handle_conclusion(self, titel, gliederung, conc_df, latex_main):
+    main_latex = latex_main
     conclusion_sub_outline = self.create_sub_outline(conc_df)
     schlusskapitel = self.get_working_chapter(conc_df, True)
     schlusskapitel_no_num = self.get_working_chapter(conc_df, False)
@@ -76,29 +114,7 @@ class ContentCrew():
     }
 
     res = str(self.conclusion_crew().kickoff(inputs=inputs))
-    return
-  
-  def get_working_chapter(self ,df , with_num):
-    first_row = df.iloc[0]
-
-    # Extract 'Nummerierung' and 'Kapitelname' from the first row
-    nummerierung = first_row['Nummerierung']
-    kapitelname = first_row['Kapitelname']
-
-    if with_num:
-      return f"{nummerierung} {kapitelname}\n"
-    return f"{kapitelname}\n"
-  
-
-
-  
-  def create_sub_outline(self, df):
-    gliederung_string = ""
-    for index, row in df.iterrows():
-        nummerierung = row['Nummerierung']
-        kapitelname = row['Kapitelname']
-        gliederung_string += f"{nummerierung} {kapitelname}\n"
-    return gliederung_string
+    return res
   
 
   async def handle_mainpart(self, titel, gliederung, main_df):
@@ -136,17 +152,16 @@ class ContentCrew():
 
   def replace_cite(self, content, cite):
      for (index, filename) in cite:
-        content = content.replace(f"[{str(index)}]",f"cite({filename})")
-        print("############# Content")
-        print(f"Inde : {str(index)} , Filename : {filename}")
+        content = content.replace(f"[{str(index)}]",f"cite({filename.replace(".md", "")})")
      return content
+
   
 
   async def handle_rag_main(self, titel, gliederung, chapter_name):
     """Handles the RAG processing for a chapter."""
     print(f"Handling RAG main for chapter: {chapter_name}")
     rag_prompt_template = prompt_temeplate.rag_template_mainpart
-    rag_prompt = rag_prompt_template.replace("{thema}", titel).replace("{gliederung}", gliederung).replace("{abschnitt}", chapter_name)
+    rag_prompt = rag_prompt_template.replace("{thema}", titel).replace("{abschnitt}", chapter_name)#.replace("{gliederung}", gliederung)
     print(f"Generated RAG prompt: {rag_prompt}")
     result = await self.rag.retrieve_rag_answer(rag_prompt)
     print(f"Retrieved RAG result for chapter: {chapter_name}")
@@ -156,16 +171,22 @@ class ContentCrew():
     return result_response, cite_list
   
 
-  async def handle_introduction(self, titel, gliederung, introduciton_df):
-    return
+  def get_working_chapter(self ,df , with_num):
+    first_row = df.iloc[0]
+
+    # Extract 'Nummerierung' and 'Kapitelname' from the first row
+    nummerierung = first_row['Nummerierung']
+    kapitelname = first_row['Kapitelname']
+
+    if with_num:
+      return f"{nummerierung} {kapitelname}\n"
+    return f"{kapitelname}\n"
   
 
-  async def handle_introduction(self, titel, gliederung, introduciton_df):
-    return
-  
-
-  def parse_cite_from_dataframe(self, index, row):
-      import ast
-      cite_str = row['cite']
-      cite = ast.literal_eval(cite_str)
-      return cite
+  def create_sub_outline(self, df):
+    gliederung_string = ""
+    for index, row in df.iterrows():
+        nummerierung = row['Nummerierung']
+        kapitelname = row['Kapitelname']
+        gliederung_string += f"{nummerierung} {kapitelname}\n"
+    return gliederung_string

@@ -4,9 +4,12 @@ outline_task:
     
     Die Seminararbeit hat einen Umfang von 12 - 15 Seiten an Text.
 
-    Bei der Gliederung muss erkennbar sein, welches Kapitel zu Einleitung, Hauptteil und SChluss zugehörig ist. 
+    Bei der Gliederung muss erkennbar sein, welches Kapitel zu Einleitung, Hauptteil und Schluss zugehörig ist. 
     Diese Information kann in Klammern hinter die jeweiligen Kapitel hinzugefügt werden.
+
+    Die Gliederung sollte nicht tiefer als zwei Ebenen sein.
+    Eine Nummerierung wie 1.1.1 ist nicht erlaubt!
   expected_output: >
-    Eine Gliederung für eine Seminararbeit mit dem Titel {seminararbeitthema}.
+    Eine Gliederung für eine Seminararbeit mit dem Titel "{seminararbeitthema}".
   agent: outline_creator
   output_file: output/gliederung_ansatz{index}.md

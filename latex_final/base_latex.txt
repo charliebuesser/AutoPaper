@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage[german]{babel}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[authoryear,round]{natbib}
+
+
+
+\begin{document}
+
+% Titelblatt
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+
+    % Titel der Arbeit
+    \Huge{{titel}}\\[1.5cm]
+
+    % Art der Arbeit und Studieninformationen
+    \LARGE{{arbeit_art}}\\
+    \Large{{kursbezeichnung}}\\
+    \Large{{Studiengang}}\\[1cm]
+
+    % Datum
+    \large{{date}}\\[1cm]
+
+    % Verfasserinformationen
+    \large{Name : {name}}\\
+    \large{Matrikelnummer: {matrikelnummer}}\\[1cm]
+
+    % Tutorinformationen
+    \large{Name Tutor:in: {name_tutor}}\\
+    
+    \vfill
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+
+{content}
+
+\bibliography{literatur} 
+
+\end{document}

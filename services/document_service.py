@@ -45,7 +45,7 @@ class DocumentService():
     """
     try:
   
-        markdown_file_path = os.path.join(directory_path, f"{filename}.md")
+        markdown_file_path = os.path.join(directory_path, f"{filename.replace(".pdf","")}.md")
         with open(markdown_file_path, 'w', encoding='utf-8') as md_file:
             md_file.write(content)
         print(f"Markdown-Datei wurde erstellt: {markdown_file_path}")
