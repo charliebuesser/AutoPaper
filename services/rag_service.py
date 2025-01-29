@@ -30,8 +30,12 @@ class RagService:
         return result
     
     def retrivie_cite(self, result):
+        import re
+        pattern = r'\bSource\s(\d{1,2}|100)\b'
         cite = []
         for index, node in enumerate(result.source_nodes):
-            cite.append((index, node.metadata['file_name']))
+            node.text
+            match = re.search(pattern, node.text)
+            cite.append((match.group(1), node.metadata['file_name']))
         return cite
 

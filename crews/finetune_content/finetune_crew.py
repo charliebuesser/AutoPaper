@@ -10,6 +10,7 @@ class FinetuneCrew():
     return Agent(
       config=self.agents_config['fine_tune_creator'],
       verbose=True,
+      llm="o1-preview",
       tools=[]
     )
 

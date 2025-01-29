@@ -140,7 +140,7 @@ class ContentCrew():
       
       print(f"Inputs prepared for crew kickoff: {inputs}")
       res = str(self.main_crew().kickoff(inputs=inputs))
-
+      res = self.clean_rag_result( res)
       res = self.replace_cite(res, cite_list)
       print(f"Received response: {res}")
 
@@ -166,11 +166,14 @@ class ContentCrew():
     result = await self.rag.retrieve_rag_answer(rag_prompt)
     print(f"Retrieved RAG result for chapter: {chapter_name}")
     cite_list = self.rag.retrivie_cite(result)
-    result_response = result.response
+    result_response = self.clean_rag_result(result.response )
     print(f"Retrieved response and citation list for chapter: {chapter_name}")
     return result_response, cite_list
   
-
+  def clean_rag_result(self, result):
+    lower_result = result.lower()
+    return lower_result.split('literature')[0].split('literatur')[0]
+    
   def get_working_chapter(self ,df , with_num):
     first_row = df.iloc[0]
 

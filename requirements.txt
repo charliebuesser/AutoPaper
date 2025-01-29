@@ -1,0 +1,3 @@
+crewai[tools]
+llama-index
+docling

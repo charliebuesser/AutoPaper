@@ -8,9 +8,9 @@ write_task:
     Du hast bereits wichtige Informationen und Literaturverweise in Form von Stichpunkten gesammelt.
 
     Beachte: Der ausformulierte Text darf ausschließlich auf den in den Stichpunkten genannten Informationen und Literaturverweisen basieren. Verwende die Literaturnummern aus den Stichpunkten auch im Fließtext.
+    Hinweis : Nutze NIEMALS Literaturverweise/Quellenverweise, welche nicht in den Stichpunkten vorkommen!
 
-
-    Hier sind die Stichpunkte und Literaturverweise welche du für das Kapitel "{kapitel}" nutzen darfst:
+    Hier sind die Stichpunkte und Literaturverweise (mit [n] gekennzeichnet) welche du für das Kapitel "{kapitel}" nutzen darfst: 
 
     {bulletpoints}
 
@@ -38,6 +38,7 @@ write_task_conclusion:
     {sub_outline}
 
 
+    Hinweis : Nutze NIEMALS Literaturverweise/Quellenverweise, welche nicht in den obigen Text vorkommen!
     Der Hauptteil der Seminararbeit auf den du dich in deinem Schlussteil beziehen darfst findest du hier :
     
     {hauptteil}
@@ -79,6 +80,7 @@ write_task_introduction:
 
 
 
+    Hinweis : Nutze NIEMALS Literaturverweise/Quellenverweise, welche nicht in den obigen Text vorkommen!
     Schreibe nun den Einleitungsteil ab dem Kapitel "{anfangskapitel}".
 
   expected_output: >

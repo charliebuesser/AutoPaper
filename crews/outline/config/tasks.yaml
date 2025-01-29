@@ -7,9 +7,9 @@ outline_task:
     Bei der Gliederung muss erkennbar sein, welches Kapitel zu Einleitung, Hauptteil und Schluss zugehörig ist. 
     Diese Information kann in Klammern hinter die jeweiligen Kapitel hinzugefügt werden.
 
-    Die Gliederung sollte nicht tiefer als zwei Ebenen sein.
-    Eine Nummerierung wie 1.1.1 ist nicht erlaubt!
+    Gliederungspunkte dürfen maximal zwei Ebenen der Nummerierung aufweisen. Strukturen wie '2.3.1' sind unzulässig
   expected_output: >
     Eine Gliederung für eine Seminararbeit mit dem Titel "{seminararbeitthema}".
+    Gliederungspunkte dürfen maximal zwei Ebenen der Nummerierung aufweisen. Strukturen wie '2.3.1' sind unzulässig
   agent: outline_creator
-  output_file: output/gliederung_ansatz{index}.md
+  output_file: '{path}.md'

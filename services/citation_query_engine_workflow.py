@@ -123,7 +123,7 @@ class CitationQueryEngineWorkflow(Workflow):
             print("Index is empty, load some documents before querying!")
             return None
 
-        retriever = ev.index.as_retriever(similarity_top_k=4)
+        retriever = ev.index.as_retriever(similarity_top_k=10)
         nodes = retriever.retrieve(query)
         print(f"Retrieved {len(nodes)} nodes.")
         return RetrieverEvent(nodes=nodes)
@@ -176,7 +176,7 @@ class CitationQueryEngineWorkflow(Workflow):
         self, ctx: Context, ev: CreateCitationsEvent
     ) -> StopEvent:
         """Return a streaming response using the retrieved nodes."""
-        llm = OpenAI(model="gpt-4o-mini")
+        llm = OpenAI(model="gpt-4o")
         query = await ctx.get("query", default=None)
 
         synthesizer = get_response_synthesizer(
