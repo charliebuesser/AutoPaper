@@ -1,16 +1,5 @@
 # Erstelle erste Entwürfe für wissenschaftliche Arbeiten
 
-# SetUp:
-### Create a new Conda environment with Python 3.12
-`conda create --name abschlussarbeit python=3.12`
-
-### Activate the new environment
-`conda activate abschlussarbeit`
-
-### Install all dependencies from requirements.txt
-`pip install -r requirements.txt`
-
-
 # Betriebsmodi
 Das Programm kann in zwei verschiedenen Modi betrieben werden:
 
@@ -63,6 +52,16 @@ Im Inhalt-Modus wird der Inhalt der wissenschaftlichen Arbeit basierend auf eine
 **name_tutor**: Name des Tutors.
 **arbeit_art**: Art der Arbeit (z.B. Seminararbeit, Bachelorarbeit).
 
+
+# SetUp:
+### Create a new Conda environment with Python 3.12
+`conda create --name abschlussarbeit python=3.12`
+
+### Activate the new environment
+`conda activate abschlussarbeit`
+
+### Install all dependencies from requirements.txt
+`pip install -r requirements.txt`
 
 
 # Weitere Informationen
